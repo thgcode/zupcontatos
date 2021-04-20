@@ -25,4 +25,14 @@ public class ContatoController {
     public Iterable <ContatoModel> listarContatos() {
         return contatoService.listarContatos();
     }
+
+    @GetMapping("peloIdDoProduto/{id}/")
+    public Iterable <ContatoModel> listarContatosPeloIdDoProduto(@PathVariable int id) {
+        return contatoService.listarContatosPeloIdDoProduto(id);
+    }
+
+    @GetMapping("peloIdDaCategoria/{id}/")
+    public Iterable <ContatoModel> listarPeloIdDaCategoria(@PathVariable int id) {
+        return contatoService.listarContatosPeloIdDaCategoriaDoProduto(id);
+    }
 }
