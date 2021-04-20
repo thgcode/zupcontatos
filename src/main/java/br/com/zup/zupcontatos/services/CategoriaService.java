@@ -1,5 +1,6 @@
 package br.com.zup.zupcontatos.services;
 
+import br.com.zup.zupcontatos.exceptions.CategoriaNaoEncontradaException;
 import br.com.zup.zupcontatos.models.CategoriaModel;
 import br.com.zup.zupcontatos.repositories.CategoriaRepository;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,6 @@ public class CategoriaService {
             return optionalCategoria.get();
         }
 
-        throw new RuntimeException("Categoria não encontrada");
+        throw new CategoriaNaoEncontradaException();
     }
 }
