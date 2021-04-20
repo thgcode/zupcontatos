@@ -3,6 +3,7 @@ package br.com.zup.zupcontatos.controllers;
 import br.com.zup.zupcontatos.dtos.CadastroDeProdutoDTO;
 import br.com.zup.zupcontatos.models.ProdutoModel;
 import br.com.zup.zupcontatos.services.ProdutoService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -17,6 +18,7 @@ public class ProdutoController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public ProdutoModel cadastrarProduto(@Valid @RequestBody CadastroDeProdutoDTO dto) {
         return produtoService.cadastrarProduto(dto.converterParaProduto());
     }
