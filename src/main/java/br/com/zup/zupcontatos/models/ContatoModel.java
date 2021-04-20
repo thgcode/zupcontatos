@@ -12,6 +12,8 @@ public class ContatoModel {
     @Column(unique = true)
     private String nomeCompleto;
 
+    private String telefone;
+
     @ManyToMany
     private List<ProdutoModel> listaDeProdutos;
 
@@ -33,6 +35,14 @@ public class ContatoModel {
 
     public void setNomeCompleto(String nomeCompleto) {
         this.nomeCompleto = nomeCompleto;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 
     public List<ProdutoModel> getListaDeProdutos() {

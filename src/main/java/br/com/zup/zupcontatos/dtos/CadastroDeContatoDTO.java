@@ -13,6 +13,8 @@ public class CadastroDeContatoDTO {
     @NotBlank
     private String nomeCompleto;
 
+    private String telefone;
+
     public CadastroDeContatoDTO() {
 
     }
@@ -33,11 +35,20 @@ public class CadastroDeContatoDTO {
         this.nomeCompleto = nomeCompleto;
     }
 
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
     public ContatoModel converterParaContato() {
         ContatoModel contato = new ContatoModel();
 
         contato.setEmail(email);
         contato.setNomeCompleto(nomeCompleto);
+        contato.setTelefone(telefone);
 
         return contato;
     }
