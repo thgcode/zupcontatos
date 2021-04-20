@@ -75,4 +75,10 @@ public class ContatoService {
 
         return inscreve(contatoExistente, produtoExistente);
     }
+
+    public void removerContatoPeloEmail(String email) {
+        pesquisarContatoPeloEmail(email);
+
+        contatoRepository.deleteById(email);
+    }
 }
