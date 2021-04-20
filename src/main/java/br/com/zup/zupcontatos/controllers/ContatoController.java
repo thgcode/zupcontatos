@@ -3,6 +3,7 @@ package br.com.zup.zupcontatos.controllers;
 import br.com.zup.zupcontatos.dtos.CadastroDeContatoDTO;
 import br.com.zup.zupcontatos.models.ContatoModel;
 import br.com.zup.zupcontatos.services.ContatoService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -17,6 +18,7 @@ public class ContatoController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public ContatoModel cadastrarContato(@Valid @RequestBody CadastroDeContatoDTO dto) {
         return contatoService.cadastrarContato(dto.converterParaContato());
     }

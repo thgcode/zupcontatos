@@ -23,8 +23,8 @@ public class ContatoService {
         return contatoRepository.findAll();
     }
 
-    public ContatoModel pesquisarContatoPeloId(int id) {
-        Optional<ContatoModel> optionalContato = contatoRepository.findById(id);
+    public ContatoModel pesquisarContatoPeloEmail(String email) {
+        Optional<ContatoModel> optionalContato = contatoRepository.findById(email);
 
         if (optionalContato.isPresent()) {
             return optionalContato.get();
