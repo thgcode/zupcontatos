@@ -15,4 +15,8 @@ public class CategoriaService {
     public CategoriaModel cadastrarCategoria(CategoriaModel categoria) {
         return categoriaRepository.save(categoria);
     }
+
+    public Iterable <CategoriaModel> listarTodasAsCategorias() {
+        return categoriaRepository.findAll();
+    }
 }
