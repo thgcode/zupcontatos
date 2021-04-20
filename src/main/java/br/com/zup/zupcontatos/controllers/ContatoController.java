@@ -43,4 +43,10 @@ public class ContatoController {
     public ContatoModel inscreverOuDesinscreverEmUmProduto(@RequestBody @Valid InscreverEmUmProdutoDTO dto) {
         return contatoService.inscreverOuDesinscreverEmUmProduto(dto.converterParaContato(), dto.converterParaProduto());
     }
+
+    @DeleteMapping("{email}/")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void removerContatoPeloEmail(@PathVariable String email) {
+        contatoService.removerContatoPeloEmail(email);
+    }
 }
