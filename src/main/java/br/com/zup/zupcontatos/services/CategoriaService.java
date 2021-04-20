@@ -22,7 +22,13 @@ public class CategoriaService {
         return categoriaRepository.findAll();
     }
 
-    public Optional <CategoriaModel> pesquisarCategoriaPeloId(int id) {
-        return categoriaRepository.findById(id);
+    public CategoriaModel pesquisarCategoriaPeloId(int id) {
+        Optional <CategoriaModel> optionalCategoria = categoriaRepository.findById(id);
+
+        if (optionalCategoria.isPresent()) {
+            return optionalCategoria.get();
+        }
+
+        throw new RuntimeException("Categoria não encontrada");
     }
 }
