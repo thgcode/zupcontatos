@@ -1,6 +1,7 @@
 package br.com.zup.zupcontatos.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "produtos")
@@ -12,8 +13,8 @@ public class ProdutoModel {
     @Column(nullable = false)
     private String nome;
 
-    @ManyToOne(optional = false)
-    private CategoriaModel categoria;
+    @ManyToMany
+    private List <CategoriaModel> listaDeCategorias;
 
     public ProdutoModel() {
 
@@ -35,11 +36,11 @@ public class ProdutoModel {
         this.nome = nome;
     }
 
-    public CategoriaModel getCategoria() {
-        return categoria;
+    public List <CategoriaModel> getListaDeCategorias() {
+        return listaDeCategorias;
     }
 
-    public void setCategoria(CategoriaModel categoria) {
-        this.categoria = categoria;
+    public void setListaDeCategorias(List <CategoriaModel> listaDeCategorias) {
+        this.listaDeCategorias = listaDeCategorias;
     }
 }

@@ -5,6 +5,7 @@ import br.com.zup.zupcontatos.models.ProdutoModel;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
+import java.util.Arrays;
 
 public class CadastroDeProdutoDTO {
     @NotBlank
@@ -37,7 +38,7 @@ public class CadastroDeProdutoDTO {
         CategoriaModel categoria = new CategoriaModel();
         categoria.setId(categoriaId);
         produto.setNome(nome);
-        produto.setCategoria(categoria);
+        produto.setListaDeCategorias(Arrays.asList(categoria));
         return produto;
     }
 }

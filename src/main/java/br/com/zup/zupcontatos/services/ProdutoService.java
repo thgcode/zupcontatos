@@ -18,9 +18,9 @@ public class ProdutoService {
     }
 
     public ProdutoModel cadastrarProduto(ProdutoModel produto) {
-        CategoriaModel categoria = categoriaService.pesquisarCategoriaPeloId(produto.getCategoria().getId());
+        CategoriaModel categoria = categoriaService.pesquisarCategoriaPeloId(produto.getListaDeCategorias().get(0).getId());
 
-        produto.setCategoria(categoria);
+        produto.getListaDeCategorias().set(0, categoria);
 
         return produtoRepository.save(produto);
     }
