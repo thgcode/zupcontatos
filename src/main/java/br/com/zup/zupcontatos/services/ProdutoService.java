@@ -3,9 +3,11 @@ package br.com.zup.zupcontatos.services;
 import br.com.zup.zupcontatos.models.CategoriaModel;
 import br.com.zup.zupcontatos.models.ProdutoModel;
 import br.com.zup.zupcontatos.repositories.ProdutoRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class ProdutoService {
     private ProdutoRepository produtoRepository;
     private CategoriaService categoriaService;
