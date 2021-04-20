@@ -6,7 +6,7 @@ public class Erro {
 
     public Erro() {
     }
-    
+
     public Erro(String campo, String mensagem) {
         this.campo = campo;
         this.mensagem = mensagem;
