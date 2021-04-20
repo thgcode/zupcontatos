@@ -1,6 +1,7 @@
 package br.com.zup.zupcontatos.controllers;
 
 import br.com.zup.zupcontatos.dtos.CadastroDeContatoDTO;
+import br.com.zup.zupcontatos.dtos.InscreverEmUmProdutoDTO;
 import br.com.zup.zupcontatos.models.ContatoModel;
 import br.com.zup.zupcontatos.services.ContatoService;
 import org.springframework.http.HttpStatus;
@@ -36,5 +37,10 @@ public class ContatoController {
     @GetMapping("peloIdDaCategoria/{id}/")
     public Iterable <ContatoModel> listarPeloIdDaCategoria(@PathVariable int id) {
         return contatoService.listarContatosPeloIdDaCategoriaDoProduto(id);
+    }
+
+    @PostMapping("inscricao/")
+    public ContatoModel inscreverOuDesinscreverEmUmProduto(@RequestBody @Valid InscreverEmUmProdutoDTO dto) {
+        return contatoService.inscreverOuDesinscreverEmUmProduto(dto.converterParaContato(), dto.converterParaProduto());
     }
 }
