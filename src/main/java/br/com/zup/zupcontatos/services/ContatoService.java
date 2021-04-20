@@ -1,5 +1,6 @@
 package br.com.zup.zupcontatos.services;
 
+import br.com.zup.zupcontatos.exceptions.ContatoNaoEncontradoException;
 import br.com.zup.zupcontatos.models.ContatoModel;
 import br.com.zup.zupcontatos.repositories.ContatoRepository;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,7 @@ public class ContatoService {
             return optionalContato.get();
         }
 
-        throw new RuntimeException("Contato não encontrado");
+        throw new ContatoNaoEncontradoException();
     }
 
     public Iterable <ContatoModel> listarContatosPeloIdDoProduto(int id) {
