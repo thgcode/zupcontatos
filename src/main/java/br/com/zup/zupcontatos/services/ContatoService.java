@@ -31,4 +31,12 @@ public class ContatoService {
 
         throw new RuntimeException("Contato não encontrado");
     }
+
+    public Iterable <ContatoModel> listarContatosPeloIdDoProduto(int id) {
+        return contatoRepository.findAllByListaDeProdutos_id(id);
+    }
+
+    public Iterable <ContatoModel> listarContatosPeloIdDaCategoriaDoProduto(int id) {
+        return contatoRepository.findAllByListaDeProdutos_listaDeCategorias_id(id);
+    }
 }
