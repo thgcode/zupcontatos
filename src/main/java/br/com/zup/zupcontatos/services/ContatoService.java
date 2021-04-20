@@ -65,7 +65,7 @@ public class ContatoService {
         return contatoRepository.save(contato);
     }
 
-    public ContatoModel inscreveOuDesinscreveEmUmProduto(ContatoModel contato, ProdutoModel produto) {
+    public ContatoModel inscreverOuDesinscreverEmUmProduto(ContatoModel contato, ProdutoModel produto) {
         ContatoModel contatoExistente = pesquisarContatoPeloEmail(contato.getEmail());
         ProdutoModel produtoExistente= produtoService.pesquisarProdutoPeloId(produto.getId());
 
