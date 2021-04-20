@@ -48,6 +48,6 @@ public class InscreverEmUmProdutoDTO {
 
         produto.setId(produtoId);
 
-        return produtoId;
+        return produto;
     }
 }
