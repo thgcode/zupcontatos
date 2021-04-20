@@ -3,6 +3,7 @@ package br.com.zup.zupcontatos.models;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "categorias")
 public class CategoriaModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
