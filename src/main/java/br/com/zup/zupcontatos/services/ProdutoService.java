@@ -19,7 +19,7 @@ public class ProdutoService {
     }
 
     public ProdutoModel cadastrarProduto(ProdutoModel produto) {
-        Optional <ProdutoModel> optionalProduto = produtoRepository.findById(produto.getId());
+        Optional <ProdutoModel> optionalProduto = produtoRepository.findByNome(produto.getNome());
 
         if (optionalProduto.isPresent()) {
             return atualizarProdutoComNovaCategoria(optionalProduto.get(), produto);
@@ -53,7 +53,7 @@ public class ProdutoService {
 
         return existente;
     }
-    
+
     public Iterable <ProdutoModel> listarProdutos() {
         return produtoRepository.findAll();
     }
