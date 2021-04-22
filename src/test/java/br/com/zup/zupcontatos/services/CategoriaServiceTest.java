@@ -1,5 +1,6 @@
 package br.com.zup.zupcontatos.services;
 
+import br.com.zup.zupcontatos.exceptions.CategoriaNaoEncontradaException;
 import br.com.zup.zupcontatos.models.CategoriaModel;
 import br.com.zup.zupcontatos.repositories.CategoriaRepository;
 import org.junit.jupiter.api.Assertions;
@@ -12,6 +13,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @SpringBootTest
 public class CategoriaServiceTest {
@@ -49,5 +51,27 @@ public class CategoriaServiceTest {
         Iterable <CategoriaModel> categoriasDoServico = categoriaService.listarTodasAsCategorias();
 
         Assertions.assertEquals(categorias, categoriasDoServico);
+    }
+
+    @Test
+    public void testarPesquisarCategoria() {
+        categoria.setId(1);
+
+        Mockito.when(categoriaRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(categoria));
+
+        CategoriaModel categoriaDoServico = categoriaService.pesquisarCategoriaPeloId(1);
+
+        Assertions.assertEquals(categoria, categoriaDoServico);
+
+        Mockito.verify(categoriaRepository, Mockito.times(1)).findById(1);
+    }
+
+    @Test
+    public void pesquisarCategoriaComErro() {
+        Mockito.when(categoriaRepository.findById(Mockito.anyInt())).thenReturn(Optional.empty());
+
+        Assertions.assertThrows(CategoriaNaoEncontradaException.class, () -> {
+            categoriaService.pesquisarCategoriaPeloId(1);
+        });
     }
 }
