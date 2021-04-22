@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import java.util.Arrays;
+import java.util.List;
+
 @SpringBootTest
 public class CategoriaServiceTest {
     @Autowired
@@ -35,5 +38,16 @@ public class CategoriaServiceTest {
         Mockito.verify(categoriaRepository , Mockito.times(1)).save(categoria);
 
         Assertions.assertEquals(categoria, categoriaDoServico);
+    }
+
+    @Test
+    public void testarListarCategorias() {
+        List<CategoriaModel> categorias = Arrays.asList(categoria);
+
+        Mockito.when(categoriaRepository.findAll()).thenReturn(categorias);
+
+        Iterable <CategoriaModel> categoriasDoServico = categoriaService.listarTodasAsCategorias();
+
+        Assertions.assertEquals(categorias, categoriasDoServico);
     }
 }
