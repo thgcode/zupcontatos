@@ -32,12 +32,12 @@ public class CategoriaServiceTest {
     }
 
     @Test
-    public void testarCriarCategoria() {
+    public void testarCadastrarCategoria() {
         Mockito.when(categoriaRepository.save(Mockito.any(CategoriaModel.class))).thenReturn(categoria);
 
         CategoriaModel categoriaDoServico = categoriaService.cadastrarCategoria(categoria);
 
-        Mockito.verify(categoriaRepository , Mockito.times(1)).save(categoria);
+        Mockito.verify(categoriaRepository, Mockito.times(1)).save(categoria);
 
         Assertions.assertEquals(categoria, categoriaDoServico);
     }
@@ -48,13 +48,13 @@ public class CategoriaServiceTest {
 
         Mockito.when(categoriaRepository.findAll()).thenReturn(categorias);
 
-        Iterable <CategoriaModel> categoriasDoServico = categoriaService.listarTodasAsCategorias();
+        Iterable<CategoriaModel> categoriasDoServico = categoriaService.listarTodasAsCategorias();
 
         Assertions.assertEquals(categorias, categoriasDoServico);
     }
 
     @Test
-    public void testarPesquisarCategoria() {
+    public void testarPesquisarCategoriaPeloId() {
         categoria.setId(1);
 
         Mockito.when(categoriaRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(categoria));
@@ -67,11 +67,34 @@ public class CategoriaServiceTest {
     }
 
     @Test
-    public void pesquisarCategoriaComErro() {
+    public void testarPesquisarCategoriaComPeloIdErro() {
         Mockito.when(categoriaRepository.findById(Mockito.anyInt())).thenReturn(Optional.empty());
 
         Assertions.assertThrows(CategoriaNaoEncontradaException.class, () -> {
             categoriaService.pesquisarCategoriaPeloId(1);
         });
     }
+
+    @Test
+    public void testarPesquisarCategoriaPeloNome() {
+        categoria.setId(1);
+
+        Mockito.when(categoriaRepository.findByNome(Mockito.anyString())).thenReturn(Optional.of(categoria));
+
+        CategoriaModel categoriaDoServico = categoriaService.pesquisarCategoriaPeloNome("Teste");
+
+        Assertions.assertEquals(categoria, categoriaDoServico);
+
+        Mockito.verify(categoriaRepository, Mockito.times(1)).findByNome("Teste");
+    }
+
+    @Test
+    public void testarPesquisarCategoriaPeloNomeComErro() {
+        Mockito.when(categoriaRepository.findByNome(Mockito.anyString())).thenReturn(Optional.empty());
+
+        Assertions.assertThrows(CategoriaNaoEncontradaException.class, () -> {
+            categoriaService.pesquisarCategoriaPeloNome("Teste");
+        });
+    }
+
 }

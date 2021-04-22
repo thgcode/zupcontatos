@@ -43,4 +43,14 @@ public class CategoriaService {
 
         throw new CategoriaNaoEncontradaException();
     }
+
+    public CategoriaModel pesquisarCategoriaPeloNome(String nome) {
+        Optional <CategoriaModel> optionalCategoria = categoriaRepository.findByNome(nome);
+
+        if (optionalCategoria.isPresent()) {
+            return optionalCategoria.get();
+        }
+
+        throw new CategoriaNaoEncontradaException();
+    }
 }
