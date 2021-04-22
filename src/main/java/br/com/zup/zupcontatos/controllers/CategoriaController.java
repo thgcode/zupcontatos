@@ -23,6 +23,11 @@ public class CategoriaController {
         return categoriaService.cadastrarCategoria(dto.converterParaCategoria());
     }
 
+    @GetMapping("{nome}/")
+    public CategoriaModel pesquisarCategoriaPeloNome(@PathVariable String nome) {
+        return categoriaService.pesquisarCategoriaPeloNome(nome);
+    }
+
     @GetMapping
     public Iterable <CategoriaModel> listarTodasAsCategorias() {
         return categoriaService.listarTodasAsCategorias();
