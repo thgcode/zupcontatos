@@ -53,4 +53,18 @@ public class CategoriaControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(cadastroJson)).andExpect(MockMvcResultMatchers.status().isCreated());
     }
+
+    @Test
+    public void testarCadastrarCategoriaComNomeEmBranco() throws Exception{
+        cadastroDeCategoriaDTO.setNome(null);
+
+        Mockito.when(categoriaService.cadastrarCategoria(Mockito.any(CategoriaModel.class))).thenReturn(categoria);
+
+        String cadastroJson = objectMapper.writeValueAsString(cadastroDeCategoriaDTO);
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/categorias/")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(cadastroJson)).andExpect(MockMvcResultMatchers.status().isBadRequest());
+    }
+
 }
