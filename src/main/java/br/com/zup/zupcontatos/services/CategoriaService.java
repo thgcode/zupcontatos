@@ -1,5 +1,6 @@
 package br.com.zup.zupcontatos.services;
 
+import br.com.zup.zupcontatos.exceptions.CategoriaJaExisteException;
 import br.com.zup.zupcontatos.exceptions.CategoriaNaoEncontradaException;
 import br.com.zup.zupcontatos.models.CategoriaModel;
 import br.com.zup.zupcontatos.repositories.CategoriaRepository;
@@ -15,7 +16,17 @@ public class CategoriaService {
         this.categoriaRepository = categoriaRepository;
     }
 
+    public void validarSeCategoriaJaExiste(CategoriaModel categoria) {
+        Optional <CategoriaModel> optionalCategoria = categoriaRepository.findByNome(categoria.getNome());
+
+        if (optionalCategoria.isPresent()) {
+            throw new CategoriaJaExisteException();
+        }
+    }
+
     public CategoriaModel cadastrarCategoria(CategoriaModel categoria) {
+        validarSeCategoriaJaExiste(categoria);
+
         return categoriaRepository.save(categoria);
     }
 
