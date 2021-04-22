@@ -1,5 +1,6 @@
 package br.com.zup.zupcontatos.services;
 
+import br.com.zup.zupcontatos.exceptions.ProdutoNaoEncontradoException;
 import br.com.zup.zupcontatos.models.CategoriaModel;
 import br.com.zup.zupcontatos.models.ProdutoModel;
 import br.com.zup.zupcontatos.repositories.ProdutoRepository;
@@ -38,7 +39,7 @@ public class ProdutoServiceTest {
         produto = new ProdutoModel();
         produto.setNome("Teste");
 
-        List <CategoriaModel> listaDeCategorias = new ArrayList <>();
+        List<CategoriaModel> listaDeCategorias = new ArrayList<>();
         listaDeCategorias.add(categoria);
 
         produto.setListaDeCategorias(listaDeCategorias);
@@ -80,4 +81,37 @@ public class ProdutoServiceTest {
 
         Assertions.assertEquals(2, produtoDoServico.getListaDeCategorias().size());
     }
+
+    @Test
+    public void testarListarProdutos() {
+        List<ProdutoModel> produtos = Arrays.asList(produto);
+
+        Mockito.when(produtoRepository.findAll()).thenReturn(produtos);
+
+        Iterable<ProdutoModel> produtosDoServico = produtoService.listarProdutos();
+
+        Assertions.assertEquals(produtos, produtosDoServico);
     }
+
+    @Test
+    public void testarPesquisarProduto() {
+        produto.setId(1);
+
+        Mockito.when(produtoRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(produto));
+
+        ProdutoModel produtoDoServico = produtoService.pesquisarProdutoPeloId(1);
+
+        Assertions.assertEquals(produto, produtoDoServico);
+
+        Mockito.verify(produtoRepository, Mockito.times(1)).findById(1);
+    }
+
+    @Test
+    public void pesquisarProdutoComErro() {
+        Mockito.when(produtoRepository.findById(Mockito.anyInt())).thenReturn(Optional.empty());
+
+        Assertions.assertThrows(ProdutoNaoEncontradoException.class, () -> {
+            produtoService.pesquisarProdutoPeloId(1);
+        });
+    }
+}
