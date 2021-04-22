@@ -23,6 +23,11 @@ public class ProdutoController {
         return produtoService.cadastrarProduto(dto.converterParaProduto());
     }
 
+    @GetMapping("{nome}/")
+    public ProdutoModel pesquisarProdutoPeloNome(@PathVariable String nome) {
+        return produtoService.pesquisarProdutoPeloNome(nome);
+    }
+
     @GetMapping
     public Iterable <ProdutoModel> listarProdutos() {
         return produtoService.listarProdutos();

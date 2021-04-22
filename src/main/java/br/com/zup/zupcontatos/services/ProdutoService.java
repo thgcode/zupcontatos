@@ -102,4 +102,21 @@ public class ProdutoService {
 
         throw new ProdutoNaoEncontradoException();
     }
+
+    /**
+     * Pesquisa um produto através do nome, ou lança uma exceção caso não encontre
+     *
+     * @param nome o nome do produto a pesquisar
+     *
+     * @return o produto com o determinado nome
+     */
+    public ProdutoModel pesquisarProdutoPeloNome(String nome) {
+        Optional <ProdutoModel> optionalProduto = produtoRepository.findByNome(nome);
+
+        if (optionalProduto.isPresent()) {
+            return optionalProduto.get();
+        }
+
+        throw new ProdutoNaoEncontradoException();
+    }
 }
