@@ -44,6 +44,11 @@ public class ContatoController {
         return contatoService.inscreverOuDesinscreverEmUmProduto(dto.converterParaContato(), dto.converterParaProduto());
     }
 
+    @GetMapping("{email}/")
+    public ContatoModel pesquisarContatoPeloEmail(@PathVariable String email) {
+        return contatoService.pesquisarContatoPeloEmail(email);
+    }
+
     @DeleteMapping("{email}/")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void removerContatoPeloEmail(@PathVariable String email) {
